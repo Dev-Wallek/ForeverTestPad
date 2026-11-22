@@ -1,6 +1,6 @@
 """Write TestData.lua from the in-game test list.
 
-Reads TP_TESTS (default: plans/tests.md of the ImprovedForever clone beside this repo): each "## " section's
+Reads TP_TESTS (default: tests/tests.md): each "## " section's
 numbered lines are tests, the section's other lines before them its preparation,
 and the bullets of the "Kampf" section the combat notes of the tests they name.
 The tests next-tests.md (beside tests.md) lists come first, in its order.
@@ -12,7 +12,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TESTS = Path(os.environ.get("TP_TESTS", ROOT.parent / "ImprovedForever" / "plans" / "tests.md"))
+TESTS = Path(os.environ.get("TP_TESTS", ROOT / "tests" / "tests.md"))
 OUT = ROOT / "TestData.lua"
 COMBAT = "Kampf"
 

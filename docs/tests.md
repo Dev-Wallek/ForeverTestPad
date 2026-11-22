@@ -1,6 +1,6 @@
 # Tests im Spiel
 
-`/tp tests` öffnet ein Fenster mit dem nächsten offenen Test aus `plans/tests.md` des ImprovedForever-Klons neben diesem Repo, in der Reihenfolge von `next-tests.md`.
+`/tp tests` öffnet ein Fenster mit dem nächsten offenen Test aus `tests/tests.md`, in der Reihenfolge von `tests/next-tests.md`.
 
 - **Start** beginnt einen Lauf: Die Prüfungen des Tests (`TestChecks.lua`) laufen jede Sekunde, erfüllte bekommen einen Haken. Jede Blockade (`ADDON_ACTION_BLOCKED` / `FORBIDDEN`) wird mit Addon und Funktion festgehalten. Ist das Fenster zu, zeigt ein Band oben den laufenden Test.
 - **Bestanden**, **Nicht bestanden**, **Überspringen** schließen den Lauf ab (mit Notiz, falls eingetragen) und gehen zum nächsten offenen Test; Bestanden und Nicht bestanden machen einen Screenshot. Ein Test mit vollständiger Selbstprüfung (z. B. 88) besteht von selbst.

@@ -6,7 +6,7 @@ Test-Addon für WoW Forever (WoW-Variante mit eigener Controller-UI): misst mit 
 
 - Das Repo ist das Addon: `ForeverTestPad.toc`, `ForeverTestPad.lua` (SavedVariables `ForeverTestPadDB`, Chat-Ausgabe, Log, `/tp` und `/testpad`), `Probe.lua` (Sonden, nur per `/tp probe <name>`). Das Spiel lädt nur, was die toc nennt; `tools/` und `docs/` stören dort nicht.
 - `docs/sonde.md`: wie die Sonden laufen und was sie im Spiel gemessen haben.
-- Test-Fenster `/tp tests` (`Tests.lua`, Prüfungen in `TestChecks.lua`): `docs/tests.md`. `TestData.lua` erzeugt `python3 tools/tests_to_lua.py` aus `../ImprovedForever/plans/tests.md`, nie von Hand ändern; Ergebnisse liest `luajit tools/test_results.lua` (aus dem Repo-Wurzelordner). Nach jeder Änderung an `tests.md` den Generator laufen lassen.
+- Test-Fenster `/tp tests` (`Tests.lua`, Prüfungen in `TestChecks.lua`): `docs/tests.md`. Die offenen Tests stehen in `tests/tests.md`, die zehn wichtigsten in `tests/next-tests.md` (bei jeder Änderung der Tests nachziehen). `TestData.lua` erzeugt `python3 tools/tests_to_lua.py` daraus, nie von Hand ändern; Ergebnisse liest `luajit tools/test_results.lua` (aus dem Repo-Wurzelordner). Nach jeder Änderung an `tests.md` den Generator laufen lassen.
 - Der Nutzer verlinkt diesen Ordner einmal von Hand in den AddOns-Ordner des Spiels.
 
 ## Regeln
