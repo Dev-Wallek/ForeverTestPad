@@ -1,0 +1,10 @@
+## Interface: 16001, 16002, 16003, 16100, 16101, 16200, 120105
+## Title: ForeverTestPad
+## Notes: Probes what controller code may do on Forever's gamepad UI, and runs the in-game tests (/tp tests).
+## SavedVariables: ForeverTestPadDB
+
+ForeverTestPad.lua
+Probe.lua
+TestData.lua
+TestChecks.lua
+Tests.lua
