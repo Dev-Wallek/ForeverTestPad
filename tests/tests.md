@@ -173,6 +173,7 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 132. Mit dem Pad: eine Gruppeneinladung annehmen und ablehnen, eine Handelsanfrage annehmen, im Handelsfenster ein Item legen, Gold eintragen und den Handel bestätigen; notieren, was nicht geht.
 133. Immersion an, mit dem Pad: als Druide die Gestalten (oder als Paladin die Auren, als Krieger die Haltungen) über den Klassen-Knopf öffnen: der Ring erscheint über der Pad-Leiste, nicht unten an der Kachel des Spiels; ein Zauber mit Auswahl in einem Leisten-Slot (Portale des Magiers) öffnet seinen Ring über dessen Kachel; die Begleiter-Ringe wie vorher; Auswahl mit dem rechten Stick und Bestätigen gehen wie beim Spiel. Mit `/console taintLog 1`: kein Eintrag.
 134. Nach dem neuen `RecipeData.lua`: im Auktionshaus ein Item öffnen, das ein Händler verkauft (Leinenstoff nicht, aber z. B. Faden oder Phiole): die Zeile über dem Diagramm nennt „a vendor sells it for …“; ein Item, das kein Händler verkauft, nicht.
+135. Minimap-Tab: „Square minimap“ an: um die eckige Karte liegt ein bronzefarbener Rahmen mit Rauten an den Ecken, knapp außen am Rand, nichts von der Karte verdeckt, die Knöpfe am Rand weiter klickbar; aus: Rahmen weg, die Karte rund wie vorher. Passt er zum Rest der Oberfläche?
 
 ## Kampf
 
