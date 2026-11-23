@@ -138,6 +138,16 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 
 66. Gruppe mit 2 Mitgliedern, Zauber mit Abklingzeit wirken: die Abklingzeit-Reihe rechts beginnt kurz hinter der rechten Gruppenkarte (nicht hinter einer vollen 4er-Reihe); Party-Karten mit `partyX` nach links: die Reihe rückt mit; ein Mitglied kommt dazu oder geht: der Anfang folgt der Karte; ohne Gruppe: Anfang wie bisher.
 
+## Verkauf: Reagenzien und andere Charaktere (S-110, S-112)
+
+114. Ein Charakter mit Ingenieurskunst und einem Leinenumhang in den Taschen: kein Schrott-Symbol auf dem Umhang, `/if junk why` mit dem Cursor darauf sagt „Used by your Engineering“; ein Charakter ohne Ingenieurskunst nennt ihn weiter Schrott.
+115. Mit einem Schneider-Twink auf demselben Realm und derselben Fraktion (einmal mit ImprovedForever eingeloggt): ein anderer Charakter ohne Schneiderei hat Leinenstoff in den Taschen; im Sell-Tab steht er unter „Keep“ mit „Used by <Twink>'s Tailoring“; ein Schneiderei-Rezept (nicht seelengebunden) ebenso mit „A recipe for <Twink>'s Tailoring“.
+116. Junk-Tab, „Other characters“ aus: Leinenstoff aus 115 steht wieder unter „Sell to a vendor“; wieder an: unter „Keep“.
+
+## Peek map auf L3 (S-104)
+
+117. Bindings-Tab: Peek map auf L3 legen, `/if peek`, L3 drücken und halten, loslassen, `/if peek`, `/reload`; dann `ImprovedForever.lua` aus den SavedVariables bereitstellen (Log `peekLog`).
+
 ## Kampf
 
 Ein Kampf deckt mehrere Punkte ab: direkt davor einen oder mehrere Aufbauten (A) machen, dann kämpfen und auf `ADDON_ACTION_BLOCKED` achten. Jeder Punkt dreimal, in beliebigen Kämpfen. Zum Kampf vom Fenster weggehen ist erlaubt.
