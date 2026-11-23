@@ -169,4 +169,6 @@ TP.TESTS = {
       text = "Peek map in einen Leisten-Slot (Kreuzleiste) legen: Druck öffnet die durchsichtige Karte (nicht die normale), nochmal drücken oder B schließt sie. Dasselbe aus dem Improved-Forever-Rad.", combat = {  } },
     { id = 121, section = "Peek map als Aktion (S-104, S-105)", prep = "",
       text = "Peek map auf L3 (aus 117) und auf eine Tastatur-Taste: ohne „Tap to open and close“ (Map-Tab) offen nur solange gehalten, mit der Einstellung öffnet ein Druck und der nächste schließt.", combat = {  } },
+    { id = 122, section = "Peek map als Aktion (S-104, S-105)", prep = "",
+      text = "Mit Peek map auf L3: eine Emote auf L3 doppelt legen wird abgelehnt mit „… holds the peek map: pressed twice it can't run anything“; umgekehrt (erst Doppeldruck, dann Peek map auf L3) ebenso mit Grund.", combat = {  } },
 }

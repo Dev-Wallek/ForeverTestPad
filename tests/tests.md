@@ -154,6 +154,7 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 119. Eine alte Peek-map-Belegung (vor dem Update gesetzt) steht nach dem Login als Aktion „Peek map“ auf derselben Taste und hält die Karte wie vorher.
 120. Peek map in einen Leisten-Slot (Kreuzleiste) legen: Druck öffnet die durchsichtige Karte (nicht die normale), nochmal drücken oder B schließt sie. Dasselbe aus dem Improved-Forever-Rad.
 121. Peek map auf L3 (aus 117) und auf eine Tastatur-Taste: ohne „Tap to open and close“ (Map-Tab) offen nur solange gehalten, mit der Einstellung öffnet ein Druck und der nächste schließt.
+122. Mit Peek map auf L3: eine Emote auf L3 doppelt legen wird abgelehnt mit „… holds the peek map: pressed twice it can't run anything“; umgekehrt (erst Doppeldruck, dann Peek map auf L3) ebenso mit Grund.
 
 ## Kampf
 
