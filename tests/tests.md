@@ -171,6 +171,8 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 130. Auktionshaus, Kategorie „Below vendor price“ (oder eine andere eigene) mit Suchtext: nur Items, deren Name ihn enthält.
 131. Bindings-Tab, Liste „Group“: „Invite target“, „Trade with target“, „Follow target“, „Inspect target“, „Leave group“ auf je eine Taste, einen Leisten-Slot oder ins eigene Rad legen; mit einem Spieler als Ziel tut jede, was ihr Name sagt; ohne Ziel bzw. ohne Gruppe kein Lua-Fehler.
 132. Mit dem Pad: eine Gruppeneinladung annehmen und ablehnen, eine Handelsanfrage annehmen, im Handelsfenster ein Item legen, Gold eintragen und den Handel bestätigen; notieren, was nicht geht.
+133. Immersion an, mit dem Pad: als Druide die Gestalten (oder als Paladin die Auren, als Krieger die Haltungen) über den Klassen-Knopf öffnen: der Ring erscheint über der Pad-Leiste, nicht unten an der Kachel des Spiels; ein Zauber mit Auswahl in einem Leisten-Slot (Portale des Magiers) öffnet seinen Ring über dessen Kachel; die Begleiter-Ringe wie vorher; Auswahl mit dem rechten Stick und Bestätigen gehen wie beim Spiel. Mit `/console taintLog 1`: kein Eintrag.
+134. Nach dem neuen `RecipeData.lua`: im Auktionshaus ein Item öffnen, das ein Händler verkauft (Leinenstoff nicht, aber z. B. Faden oder Phiole): die Zeile über dem Diagramm nennt „a vendor sells it for …“; ein Item, das kein Händler verkauft, nicht.
 
 ## Kampf
 
