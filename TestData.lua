@@ -159,6 +159,8 @@ TP.TESTS = {
       text = "Mit einem Schneider-Twink auf demselben Realm und derselben Fraktion (einmal mit ImprovedForever eingeloggt): ein anderer Charakter ohne Schneiderei hat Leinenstoff in den Taschen; im Sell-Tab steht er unter „Keep“ mit „Used by <Twink>'s Tailoring“; ein Schneiderei-Rezept (nicht seelengebunden) ebenso mit „A recipe for <Twink>'s Tailoring“.", combat = {  } },
     { id = 116, section = "Verkauf: Reagenzien und andere Charaktere (S-110, S-112)", prep = "",
       text = "Junk-Tab, „Other characters“ aus: Leinenstoff aus 115 steht wieder unter „Sell to a vendor“; wieder an: unter „Keep“.", combat = {  } },
+    { id = 118, section = "Improved-Forever-Rad (S-108)", prep = "",
+      text = "Wheels-Tab, Rad „Improved Forever“: zeigt die fünf Fenster wie bisher; einen Slot mit Kreuz auf „Minimap labels“ oder „Reload“ setzen, einen mit Dreieck leeren, Rad im Spiel öffnen: es zeigt genau diese Slots und der gewählte tut, was er soll; Dreieck gehalten setzt auf die fünf Fenster zurück. Die Liste rechts enthält nur Improved-Forever-Funktionen (ohne Peek map).", combat = {  } },
     { id = 117, section = "Peek map auf L3 (S-104)", prep = "",
       text = "Bindings-Tab: Peek map auf L3 legen, /if peek, L3 drücken und halten, loslassen, /if peek, /reload; dann ImprovedForever.lua aus den SavedVariables bereitstellen (Log peekLog).", combat = {  } },
 }
