@@ -146,11 +146,14 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 
 ## Improved-Forever-Rad (S-108)
 
-118. Wheels-Tab, Rad „Improved Forever“: zeigt die fünf Fenster wie bisher; einen Slot mit Kreuz auf „Minimap labels“ oder „Reload“ setzen, einen mit Dreieck leeren, Rad im Spiel öffnen: es zeigt genau diese Slots und der gewählte tut, was er soll; Dreieck gehalten setzt auf die fünf Fenster zurück. Die Liste rechts enthält nur Improved-Forever-Funktionen (ohne Peek map).
+118. Wheels-Tab, Rad „Improved Forever“: zeigt die fünf Fenster wie bisher; einen Slot mit Kreuz auf „Minimap labels“ oder „Reload“ setzen, einen mit Dreieck leeren, Rad im Spiel öffnen: es zeigt genau diese Slots und der gewählte tut, was er soll; Dreieck gehalten setzt auf die fünf Fenster zurück. Die Liste rechts enthält nur Improved-Forever-Funktionen, die Peek map darunter.
 
-## Peek map auf L3 (S-104)
+## Peek map als Aktion (S-104, S-105)
 
-117. Bindings-Tab: Peek map auf L3 legen, `/if peek`, L3 drücken und halten, loslassen, `/if peek`, `/reload`; dann `ImprovedForever.lua` aus den SavedVariables bereitstellen (Log `peekLog`).
+117. Bindings-Tab: Peek map (Liste „Misc“) auf L3 legen, `/if peek`, L3 drücken und halten, loslassen, `/if peek`, `/reload`; dann `ImprovedForever.lua` aus den SavedVariables bereitstellen (Log `peekLog`).
+119. Eine alte Peek-map-Belegung (vor dem Update gesetzt) steht nach dem Login als Aktion „Peek map“ auf derselben Taste und hält die Karte wie vorher.
+120. Peek map in einen Leisten-Slot (Kreuzleiste) legen: Druck öffnet die durchsichtige Karte (nicht die normale), nochmal drücken oder B schließt sie. Dasselbe aus dem Improved-Forever-Rad.
+121. Peek map auf L3 (aus 117) und auf eine Tastatur-Taste: ohne „Tap to open and close“ (Map-Tab) offen nur solange gehalten, mit der Einstellung öffnet ein Druck und der nächste schließt.
 
 ## Kampf
 
