@@ -150,7 +150,7 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 
 ## Peek map als Aktion (S-104, S-105)
 
-117. Bindings-Tab: Peek map (Liste „Misc“) auf L3 legen, `/if peek`, L3 drücken und halten, loslassen, `/if peek`, `/reload`; dann `ImprovedForever.lua` aus den SavedVariables bereitstellen (Log `peekLog`).
+117. Bindings-Tab: Peek map (Liste „Misc“) auf L3 legen, `/if peek`, L3 drücken und halten, loslassen, `/if peek`, `/reload`; dann `ImprovedForever.lua` aus den SavedVariables bereitstellen (Log `peekLog`). Dazu eine Emote auf L1 + L3 legen, drücken: läuft die Emote, der Autorun oder beides?
 119. Eine alte Peek-map-Belegung (vor dem Update gesetzt) steht nach dem Login als Aktion „Peek map“ auf derselben Taste und hält die Karte wie vorher.
 120. Peek map in einen Leisten-Slot (Kreuzleiste) legen: Druck öffnet die durchsichtige Karte (nicht die normale), nochmal drücken oder B schließt sie. Dasselbe aus dem Improved-Forever-Rad.
 121. Peek map auf L3 (aus 117) und auf eine Tastatur-Taste: ohne „Tap to open and close“ (Map-Tab) offen nur solange gehalten, mit der Einstellung öffnet ein Druck und der nächste schließt.

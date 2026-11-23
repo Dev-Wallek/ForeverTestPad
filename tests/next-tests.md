@@ -6,7 +6,7 @@ Kurzfassung von `tests.md`, geordnet nach dem, was ein Test freischaltet. Die Nu
 |---|---|---|---|
 | 0 | 94 | Test-Fenster `/tp tests` ausprobieren; danach laufen alle weiteren Tests darüber | S-74 |
 | 0b | 107–113 | Berufskarte an drei Rezepten, `/if prof audit`, Karte per Tippen, Zauberstab auf Viereck, Reload-Knopf, General-Schalter, Fischsammlung und Bags & Bank mit dem Pad | PR 1, PR 5, PR 6 (`prs.md`) |
-| 0c | 117, 119–122 | Peek map auf L3, `/if peek`, drücken, `/reload`, `ImprovedForever.lua` bereitstellen; alte Belegung, Leisten-Slot, Rad, Halten/Tippen, Doppeldruck abgelehnt | S-104, S-105, danach der Belegungs-Plan (`bindings-overhaul.md`) |
+| 0c | 117, 119–122 | Peek map auf L3, `/if peek`, drücken, `/reload`, `ImprovedForever.lua` bereitstellen, Emote auf L1 + L3 (läuft Autorun mit?); alte Belegung, Leisten-Slot, Rad, Halten/Tippen, Doppeldruck abgelehnt | S-104, S-105, danach der Belegungs-Plan (`bindings-overhaul.md`) |
 | 1 | 86–88, 95 | Auktionshaus öffnen, `/dump ImprovedForever.Auction.Price(…)`, „Auction window“ aus, graues Item im Sell-Tab, Schwelle ändern, Kategorie „Below vendor price“ | S-69, S-90, S-91 und der Grau-Fix fertig |
 | 1b | 96–99 | Hauptmenü > Stärkungseffekte (Auswahl am richtigen Platz); Info-Leiste verlinken, jeden Ort, Werte, Sitzungsgewinn; Stapel-Tooltip | Buff-Fix, Info-Leiste S-92–S-94, Stapelpreis fertig |
 | 1c | 100–102 | Bags & Bank verlinken, Bank öffnen, zweiter Charakter, `/if bags` mit Pad und Maus, Kampf | S-82–S-85 fertig; danach kann BagSync weg |

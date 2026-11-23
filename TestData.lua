@@ -162,7 +162,7 @@ TP.TESTS = {
     { id = 118, section = "Improved-Forever-Rad (S-108)", prep = "",
       text = "Wheels-Tab, Rad „Improved Forever“: zeigt die fünf Fenster wie bisher; einen Slot mit Kreuz auf „Minimap labels“ oder „Reload“ setzen, einen mit Dreieck leeren, Rad im Spiel öffnen: es zeigt genau diese Slots und der gewählte tut, was er soll; Dreieck gehalten setzt auf die fünf Fenster zurück. Die Liste rechts enthält nur Improved-Forever-Funktionen, die Peek map darunter.", combat = {  } },
     { id = 117, section = "Peek map als Aktion (S-104, S-105)", prep = "",
-      text = "Bindings-Tab: Peek map (Liste „Misc“) auf L3 legen, /if peek, L3 drücken und halten, loslassen, /if peek, /reload; dann ImprovedForever.lua aus den SavedVariables bereitstellen (Log peekLog).", combat = {  } },
+      text = "Bindings-Tab: Peek map (Liste „Misc“) auf L3 legen, /if peek, L3 drücken und halten, loslassen, /if peek, /reload; dann ImprovedForever.lua aus den SavedVariables bereitstellen (Log peekLog). Dazu eine Emote auf L1 + L3 legen, drücken: läuft die Emote, der Autorun oder beides?", combat = {  } },
     { id = 119, section = "Peek map als Aktion (S-104, S-105)", prep = "",
       text = "Eine alte Peek-map-Belegung (vor dem Update gesetzt) steht nach dem Login als Aktion „Peek map“ auf derselben Taste und hält die Karte wie vorher.", combat = {  } },
     { id = 120, section = "Peek map als Aktion (S-104, S-105)", prep = "",
