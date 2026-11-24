@@ -64,7 +64,7 @@ def order(tests):
     if nxt.exists():
         for row in nxt.read_text(encoding="utf-8").splitlines():
             cells = [c.strip() for c in row.split("|")]
-            if len(cells) > 3 and cells[1].isdigit():
+            if len(cells) > 3 and re.fullmatch(r"\d+[a-z]?", cells[1]):
                 first.extend(n for n in numbers(cells[2]) if n not in first)
     rank = {n: i for i, n in enumerate(first)}
     return sorted(tests, key=lambda t: (rank.get(t["id"], len(rank)), tests.index(t)))
