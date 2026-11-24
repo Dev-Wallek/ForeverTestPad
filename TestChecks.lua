@@ -93,6 +93,10 @@ local CHECKS = {
         },
     },
     [93] = { TAINT_LOG },
+    [144] = { On("ImprovedForever_Threat") },
+    [151] = { Printed("Brief voll („The mail is full“)", "The mail is full") },
+    [152] = { TAINT_LOG },
+    [153] = { Printed("Erinnerung im Chat („rested experience“)", "rested experience") },
 }
 
 function TP.TestChecks(id)
