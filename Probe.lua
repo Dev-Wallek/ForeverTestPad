@@ -338,20 +338,26 @@ loginCheck:SetScript("OnEvent", function()
 end)
 
 -- Rare creatures seen through unit events only, never a nameplate frame: each
--- creature once a run (its first event), the rare ones flagged. Again: off.
+-- creature once a run (its first event), the rare ones flagged; a hidden GUID once an
+-- event. A second /tp probe rares turns it off.
 local rareWatch = CreateFrame("Frame")
 local RARE_EVENTS = { "NAME_PLATE_UNIT_ADDED", "UPDATE_MOUSEOVER_UNIT", "PLAYER_TARGET_CHANGED" }
 local RARE_CLASSES = { rare = true, rareelite = true, worldboss = true }
-local rareSeen
+local rareSeen, hiddenSeen
 rareWatch:SetScript("OnEvent", function(_, event, unit)
     unit = unit or (event == "UPDATE_MOUSEOVER_UNIT" and "mouseover" or "target")
     local guid = UnitGUID(unit)
-    if issecretvalue and issecretvalue(guid) then return TP.Log("rares: " .. event .. " guid <hidden>") end
+    if issecretvalue and issecretvalue(guid) then
+        if not hiddenSeen[event] then TP.Log("rares: " .. event .. " guid <hidden>") end
+        hiddenSeen[event] = true
+        return
+    end
     if type(guid) ~= "string" or rareSeen[guid] or not guid:find("^Creature") then return end
     rareSeen[guid] = true
     local class = UnitClassification(unit)
+    local npc = select(6, strsplit("-", guid))
     TP.Log("rares: " .. event .. " " .. Str(unit) .. " class=" .. Str(class) .. " name=" .. Str(UnitName(unit))
-        .. " npc=" .. Str(guid:match("^%a+%-[^-]*%-[^-]*%-[^-]*%-[^-]*%-(%d+)")) .. (RARE_CLASSES[class] and " RARE" or ""))
+        .. " npc=" .. Str(npc) .. (RARE_CLASSES[class] and " RARE" or ""))
     if RARE_CLASSES[class] then TP.Print("Sonde rares: " .. Str(UnitName(unit)) .. " (" .. Str(class) .. ")") end
 end)
 
@@ -363,7 +369,7 @@ function P.rares()
         rareSeen = nil
         return Done("rares", "off, " .. n .. " creatures seen")
     end
-    rareSeen = {}
+    rareSeen, hiddenSeen = {}, {}
     for _, e in ipairs(RARE_EVENTS) do rareWatch:RegisterEvent(e) end
     Done("rares", "on: nameplates, mouseover and target")
 end
