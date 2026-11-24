@@ -177,7 +177,8 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 136. Einstellungsfenster mehrmals mit Menü×2 öffnen, auch mit dem Junk-Tab zuletzt offen: geht es nicht richtig auf, schließt es sich und im Chat steht „the panel failed to open, please report: …“; diese Zeile bitte melden. Offen: Menü×2 schließt es.
 137. Ein Rad mit dem Slot „Destroy“: bei geschlossenen Taschen öffnet er das Destroy-Fenster, auch mit „Destroy panel“ im Junk-Tab aus. Junk-Tab „Destroy panel“ an, Taschen zu, R2 + R3: im Chat steht, dass es nur bei offener Tasche geht (öffnet R2 + R3 ein Rad, keine Meldung).
 138. Ein NPC als Ziel, außerhalb des Kampfes: Rad-Slot „Wiki: target“ (Liste „Improved Forever“) oder `/if wiki target` öffnet seine Wiki-Seite mit Fundort und Drops; ohne Ziel oder mit einem Spieler als Ziel eine Meldung im Chat; im Kampf „opens after combat“.
-139. Auktionshaus, Buy-Tab, ein Item mit mindestens vier gescannten Tagen, das sich zuletzt um 5 % oder mehr bewegt hat: in seiner Zeile steht „rising +N%“ oder „falling −N%“, im Tooltip die Zeile „Auction: lately“. Stört es?
+139. Auktionshaus, Buy-Tab, ein Item mit mindestens vier gescannten Tagen, das sich zuletzt um 5 % oder mehr bewegt hat: in seiner Zeile steht „rising +N%“ oder „falling −N%“, bei weniger als 5 % grau „steady +N%“, im Tooltip die Zeile „Auction: lately“. Stört es?
+140. `/console taintLog 1`, `/tp probe clear`, `/tp probe rares`; durch ein Gebiet mit bekannten Rares laufen (Namensplaketten an), Kreaturen anvisieren und mit der Maus überfahren, danach mit A einen NPC ansprechen; `/tp probe rares`, `/reload`, `ForeverTestPad.lua` bereitstellen. Notieren: kam bei einem Rare die Chatzeile, und schon bevor er Ziel war?
 
 ## Kampf
 

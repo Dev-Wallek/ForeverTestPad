@@ -90,6 +90,7 @@ Das Taint-Log des Spiels ist nicht nötig; blockierte Aktionen stehen im Forever
 | `/tp probe pad1` | Baganator-Taschen offen | Legt A für 10 Sekunden ohne Priorität auf einen Knopf von ForeverTestPad und liest jeden Frame, was auf A liegt. In der Zeit A im Baganator-Fenster drücken. |
 | `/tp probe addons` | – | Zeigt oben den Knopf „TP: Speichern + neu laden“. Addon-Liste öffnen, ein Addon umschalten, Knopf anklicken. Nach dem Neuladen steht im Log, ob sich ein Zustand geändert hat (`changed={}` heißt: alles gespeichert). Die Änderung danach wieder zurückstellen. |
 | `/tp probe macro` | – | Zeigt den Knopf „TP: Makro“ mit 30 `/run`-Zeilen, zusammen über 1700 Zeichen. Anklicken; jede gelaufene Zeile steht im Log. Fragt das Spiel, ob Skripte erlaubt sind, mit Ja bestätigen. |
+| `/tp probe rares` | – | An/aus. Liest Kreaturen nur über die Ereignisse von Namensplaketten, Mouseover und Ziel (`UnitClassification`), nie einen Plaketten-Rahmen: jede Kreatur einmal ins Log, Rares mit `RARE` und einer Chatzeile. In ein Gebiet mit Rares laufen, danach mit A NPCs ansprechen: ein `ADDON_ACTION_*` im Log hieße Taint. |
 
 `/tp probe frame <Name>` schreibt einen Rahmen mit Ankern, Kindern und Eltern-Kette ins Log (sichtbar, Alpha, Ebene, Maus). `/tp probe watch <Name>` lässt die laufende Sonde zusätzlich jede Änderung von Sichtbarkeit und Ankern dieses Rahmens loggen.
 

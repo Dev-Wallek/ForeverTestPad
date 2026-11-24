@@ -337,6 +337,37 @@ loginCheck:SetScript("OnEvent", function()
     TP.Log("addons: after reload " .. count .. " compared, changed={" .. table.concat(changed, ",") .. "}")
 end)
 
+-- Rare creatures seen through unit events only, never a nameplate frame: each
+-- creature once a run (its first event), the rare ones flagged. Again: off.
+local rareWatch = CreateFrame("Frame")
+local RARE_EVENTS = { "NAME_PLATE_UNIT_ADDED", "UPDATE_MOUSEOVER_UNIT", "PLAYER_TARGET_CHANGED" }
+local RARE_CLASSES = { rare = true, rareelite = true, worldboss = true }
+local rareSeen
+rareWatch:SetScript("OnEvent", function(_, event, unit)
+    unit = unit or (event == "UPDATE_MOUSEOVER_UNIT" and "mouseover" or "target")
+    local guid = UnitGUID(unit)
+    if issecretvalue and issecretvalue(guid) then return TP.Log("rares: " .. event .. " guid <hidden>") end
+    if type(guid) ~= "string" or rareSeen[guid] or not guid:find("^Creature") then return end
+    rareSeen[guid] = true
+    local class = UnitClassification(unit)
+    TP.Log("rares: " .. event .. " " .. Str(unit) .. " class=" .. Str(class) .. " name=" .. Str(UnitName(unit))
+        .. " npc=" .. Str(guid:match("^%a+%-[^-]*%-[^-]*%-[^-]*%-[^-]*%-(%d+)")) .. (RARE_CLASSES[class] and " RARE" or ""))
+    if RARE_CLASSES[class] then TP.Print("Sonde rares: " .. Str(UnitName(unit)) .. " (" .. Str(class) .. ")") end
+end)
+
+function P.rares()
+    if rareSeen then
+        for _, e in ipairs(RARE_EVENTS) do rareWatch:UnregisterEvent(e) end
+        local n = 0
+        for _ in pairs(rareSeen) do n = n + 1 end
+        rareSeen = nil
+        return Done("rares", "off, " .. n .. " creatures seen")
+    end
+    rareSeen = {}
+    for _, e in ipairs(RARE_EVENTS) do rareWatch:RegisterEvent(e) end
+    Done("rares", "on: nameplates, mouseover and target")
+end
+
 local MACRO_LINES = 30
 
 -- A secure macro button whose macrotext is far over 255 characters; each line
