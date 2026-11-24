@@ -374,6 +374,51 @@ function P.rares()
     Done("rares", "on: nameplates, mouseover and target")
 end
 
+-- Threat of player, pet and party on the target, at most once a second while
+-- threat events come: every threat query and whether the game keeps it secret.
+-- A second /tp probe threat turns it off.
+local threatWatch = CreateFrame("Frame")
+local THREAT_EVENTS = { "UNIT_THREAT_LIST_UPDATE", "UNIT_THREAT_SITUATION_UPDATE", "PLAYER_TARGET_CHANGED" }
+local THREAT_UNITS = { "player", "pet", "party1", "party2", "party3", "party4" }
+local threatOn, threatLast = false, 0
+
+local function Secret(value)
+    return issecretvalue and issecretvalue(value) and "<hidden>" or Str(value)
+end
+
+local function ThreatLine(unit)
+    local detailed = { UnitDetailedThreatSituation(unit, "target") }
+    for i = 1, 5 do detailed[i] = Secret(detailed[i]) end
+    return unit .. " sit=" .. Secret(UnitThreatSituation(unit, "target"))
+        .. " detailed=" .. table.concat(detailed, "/", 1, 5)
+        .. " lead=" .. Secret(UnitThreatLeadSituation(unit, "target"))
+        .. " ofLead=" .. Secret(UnitThreatPercentageOfLead(unit, "target"))
+        .. " secretState=" .. Str(C_Secrets and C_Secrets.ShouldUnitThreatStateBeSecret(unit, "target"))
+        .. " secretValues=" .. Str(C_Secrets and C_Secrets.ShouldUnitThreatValuesBeSecret(unit, "target"))
+end
+
+threatWatch:SetScript("OnEvent", function()
+    if not UnitExists("target") or GetTime() - threatLast < 1 then return end
+    threatLast = GetTime()
+    TP.Log(("threat: t=%.1f target=%s class=%s boss=%s combat=%s"):format(GetTime() % 1000,
+        Secret(UnitName("target")), Secret(UnitClassification("target")),
+        Secret(UnitIsBossMob and UnitIsBossMob("target")), Str(InCombatLockdown())))
+    for _, unit in ipairs(THREAT_UNITS) do
+        if UnitExists(unit) then TP.Log("threat:   " .. ThreatLine(unit)) end
+    end
+end)
+
+function P.threat()
+    threatOn = not threatOn
+    for _, e in ipairs(THREAT_EVENTS) do
+        if threatOn then threatWatch:RegisterEvent(e) else threatWatch:UnregisterEvent(e) end
+    end
+    if not threatOn then return Done("threat", "off") end
+    Done("threat", "on; warning=" .. Str(IsThreatWarningEnabled and IsThreatWarningEnabled())
+        .. " threatWarning=" .. Str(GetCVar("threatWarning")) .. " threatShowNumeric=" .. Str(GetCVar("threatShowNumeric"))
+        .. " nameplateThreatDisplay=" .. Str(GetCVar("nameplateThreatDisplay")))
+end
+
 local MACRO_LINES = 30
 
 -- A secure macro button whose macrotext is far over 255 characters; each line
