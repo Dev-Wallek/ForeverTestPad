@@ -174,6 +174,10 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 133. Immersion an, mit dem Pad: als Druide die Gestalten (oder als Paladin die Auren, als Krieger die Haltungen) über den Klassen-Knopf öffnen: der Ring erscheint über der Pad-Leiste, nicht unten an der Kachel des Spiels; ein Zauber mit Auswahl in einem Leisten-Slot (Portale des Magiers) öffnet seinen Ring über dessen Kachel; die Begleiter-Ringe wie vorher; Auswahl mit dem rechten Stick und Bestätigen gehen wie beim Spiel. Mit `/console taintLog 1`: kein Eintrag.
 134. Nach dem neuen `RecipeData.lua`: im Auktionshaus ein Item öffnen, das ein Händler verkauft (Leinenstoff nicht, aber z. B. Faden oder Phiole): die Zeile über dem Diagramm nennt „a vendor sells it for …“; ein Item, das kein Händler verkauft, nicht.
 135. Minimap-Tab: „Square minimap“ an: um die eckige Karte liegt ein bronzefarbener Rahmen mit Rauten an den Ecken, knapp außen am Rand, nichts von der Karte verdeckt, die Knöpfe am Rand weiter klickbar; aus: Rahmen weg, die Karte rund wie vorher. Passt er zum Rest der Oberfläche?
+136. Einstellungsfenster mehrmals mit Menü×2 öffnen, auch mit dem Junk-Tab zuletzt offen: geht es nicht richtig auf, schließt es sich und im Chat steht „the panel failed to open, please report: …“; diese Zeile bitte melden. Offen: Menü×2 schließt es.
+137. Ein Rad mit dem Slot „Destroy“: bei geschlossenen Taschen öffnet er das Destroy-Fenster, auch mit „Destroy panel“ im Junk-Tab aus. Junk-Tab „Destroy panel“ an, Taschen zu, R2 + R3: im Chat steht, dass es nur bei offener Tasche geht (öffnet R2 + R3 ein Rad, keine Meldung).
+138. Ein NPC als Ziel, außerhalb des Kampfes: Rad-Slot „Wiki: target“ (Liste „Improved Forever“) oder `/if wiki target` öffnet seine Wiki-Seite mit Fundort und Drops; ohne Ziel oder mit einem Spieler als Ziel eine Meldung im Chat; im Kampf „opens after combat“.
+139. Auktionshaus, Buy-Tab, ein Item mit mindestens vier gescannten Tagen, das sich zuletzt um 5 % oder mehr bewegt hat: in seiner Zeile steht „rising +N%“ oder „falling −N%“, im Tooltip die Zeile „Auction: lately“. Stört es?
 
 ## Kampf
 
