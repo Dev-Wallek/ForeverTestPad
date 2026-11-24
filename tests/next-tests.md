@@ -4,7 +4,7 @@ Kurzfassung von `tests.md`, geordnet nach dem, was ein Test freischaltet. Die Nu
 
 | # | Tests | Was zu tun ist | Schaltet frei |
 |---|---|---|---|
-| 00 | 136–141 | Einstellungsfenster mit Menü×2 (Fehlerzeile im Chat melden), Destroy an/aus und entbunden, Wiki des Ziels, Preistrend im Auktionshaus, Sonde `rares`, Rares auf der Karte und im Wiki | Hänger im Einstellungsfenster finden, Destroy/Wiki/Trend/Rare-Karte fertig, Rare-Erkennung planen |
+| 00 | 136–142 | Einstellungsfenster mit Menü×2 (Fehlerzeile im Chat melden), Destroy an/aus und entbunden, Wiki des Ziels, Preistrend im Auktionshaus, Sonde `rares`, Rares auf der Karte und im Wiki, eckige Minikarte mit Drehen | Hänger im Einstellungsfenster finden, Destroy/Wiki/Trend/Rare-Karte/Drehen fertig, Rare-Erkennung planen |
 | 0 | 94 | Test-Fenster `/tp tests` ausprobieren; danach laufen alle weiteren Tests darüber | S-74 |
 | 0b | 107–113 | Berufskarte an drei Rezepten, `/if prof audit`, Karte per Tippen, Zauberstab auf Viereck, Reload-Knopf, General-Schalter, Fischsammlung und Bags & Bank mit dem Pad | PR 1, PR 5, PR 6 (`prs.md`) |
 | 0c | 117, 119–122 | Peek map auf L3, `/if peek`, drücken, `/reload`, `ImprovedForever.lua` bereitstellen, Emote auf L1 + L3 (läuft Autorun mit?); alte Belegung, Leisten-Slot, Rad, Halten/Tippen, Doppeldruck abgelehnt | S-104, S-105, danach der Belegungs-Plan (`bindings-overhaul.md`) |
