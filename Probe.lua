@@ -393,8 +393,8 @@ local function ThreatLine(unit)
         .. " detailed=" .. table.concat(detailed, "/", 1, 5)
         .. " lead=" .. Secret(UnitThreatLeadSituation(unit, "target"))
         .. " ofLead=" .. Secret(UnitThreatPercentageOfLead(unit, "target"))
-        .. " secretState=" .. Str(C_Secrets and C_Secrets.ShouldUnitThreatStateBeSecret(unit, "target"))
-        .. " secretValues=" .. Str(C_Secrets and C_Secrets.ShouldUnitThreatValuesBeSecret(unit, "target"))
+        .. " secretState=" .. Str(C_Secrets.ShouldUnitThreatStateBeSecret(unit, "target"))
+        .. " secretValues=" .. Str(C_Secrets.ShouldUnitThreatValuesBeSecret(unit, "target"))
 end
 
 threatWatch:SetScript("OnEvent", function()
@@ -402,7 +402,7 @@ threatWatch:SetScript("OnEvent", function()
     threatLast = GetTime()
     TP.Log(("threat: t=%.1f target=%s class=%s boss=%s combat=%s"):format(GetTime() % 1000,
         Secret(UnitName("target")), Secret(UnitClassification("target")),
-        Secret(UnitIsBossMob and UnitIsBossMob("target")), Str(InCombatLockdown())))
+        Secret(UnitIsBossMob("target")), Str(InCombatLockdown())))
     for _, unit in ipairs(THREAT_UNITS) do
         if UnitExists(unit) then TP.Log("threat:   " .. ThreatLine(unit)) end
     end
@@ -414,7 +414,7 @@ function P.threat()
         if threatOn then threatWatch:RegisterEvent(e) else threatWatch:UnregisterEvent(e) end
     end
     if not threatOn then return Done("threat", "off") end
-    Done("threat", "on; warning=" .. Str(IsThreatWarningEnabled and IsThreatWarningEnabled())
+    Done("threat", "on; warning=" .. Str(IsThreatWarningEnabled())
         .. " threatWarning=" .. Str(GetCVar("threatWarning")) .. " threatShowNumeric=" .. Str(GetCVar("threatShowNumeric"))
         .. " nameplateThreatDisplay=" .. Str(GetCVar("nameplateThreatDisplay")))
 end
@@ -437,7 +437,7 @@ end
 lootWatch:SetScript("OnEvent", function()
     local guid = UnitGUID("softinteract")
     if not guid then return TP.Log("loot: softinteract none") end
-    local kind = Secret(guid) ~= "<hidden>" and guid:match("^(%a+)") or "<hidden>"
+    local kind = not (issecretvalue and issecretvalue(guid)) and guid:match("^(%a+)") or "<hidden>"
     TP.Log("loot: softinteract kind=" .. kind
         .. " name=" .. Secret(UnitName("softinteract")) .. " dead=" .. Secret(UnitIsDead("softinteract")))
 end)
@@ -511,8 +511,7 @@ function P.xp()
         local aura = C_UnitAuras.GetAuraDataByIndex("player", i, "HELPFUL")
         if not aura then break end
         local lines = {}
-        local tip = C_TooltipInfo.GetUnitBuffByAuraInstanceID
-            and C_TooltipInfo.GetUnitBuffByAuraInstanceID("player", aura.auraInstanceID)
+        local tip = C_TooltipInfo.GetUnitBuffByAuraInstanceID("player", aura.auraInstanceID)
         for _, line in ipairs(tip and tip.lines or {}) do lines[#lines + 1] = Secret(line.leftText) end
         TP.Log("xp: aura " .. Secret(aura.name) .. " spell=" .. Secret(aura.spellId) .. " | " .. table.concat(lines, " / "))
     end
@@ -526,7 +525,7 @@ function P.xp()
 end
 
 -- Layer clues: the server, instance and zone parts of the target's GUID, on
--- every target change and party change, with the party's leader.
+-- every target, party and zone change, with the party's leader.
 local layerWatch = CreateFrame("Frame")
 local LAYER_EVENTS = { "PLAYER_TARGET_CHANGED", "GROUP_ROSTER_UPDATE", "PARTY_LEADER_CHANGED", "ZONE_CHANGED_NEW_AREA" }
 local layerOn = false
@@ -534,7 +533,7 @@ local layerOn = false
 layerWatch:SetScript("OnEvent", function(_, event)
     local guid = UnitGUID("target")
     local parts = "none"
-    if type(guid) == "string" and Secret(guid) ~= "<hidden>" and guid:find("^Creature") then
+    if type(guid) == "string" and not (issecretvalue and issecretvalue(guid)) and guid:find("^Creature") then
         local _, _, server, instance, zone, npc = strsplit("-", guid)
         parts = ("server=%s instance=%s zone=%s npc=%s"):format(server, instance, zone, npc)
     elseif guid then
