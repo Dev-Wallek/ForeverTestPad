@@ -419,6 +419,139 @@ function P.threat()
         .. " nameplateThreatDisplay=" .. Str(GetCVar("nameplateThreatDisplay")))
 end
 
+-- Interact icons and gathering tracking: the soft-target CVars, each soft
+-- interact target (kind, name, dead or not) and the minimap's tracking types.
+-- "/tp probe loot all" also turns on every interact icon until "/tp probe loot"
+-- turns it off, then logs the CVars again to show whether the game reset them.
+local lootWatch = CreateFrame("Frame")
+local SOFT_CVARS = { "SoftTargetInteract", "SoftTargetIconInteract", "SoftTargetIconGameObject",
+    "SoftTargetLowPriorityIcons", "SoftTargetNameplateInteract", "SoftTargetInteractRange", "SoftTargetInteractArc" }
+local lootOn, lootSaved = false, nil
+
+local function SoftCVars()
+    local parts = {}
+    for _, name in ipairs(SOFT_CVARS) do parts[#parts + 1] = name .. "=" .. Str(GetCVar(name)) end
+    return table.concat(parts, " ")
+end
+
+lootWatch:SetScript("OnEvent", function()
+    local guid = UnitGUID("softinteract")
+    if not guid then return TP.Log("loot: softinteract none") end
+    local kind = Secret(guid) ~= "<hidden>" and guid:match("^(%a+)") or "<hidden>"
+    TP.Log("loot: softinteract kind=" .. kind
+        .. " name=" .. Secret(UnitName("softinteract")) .. " dead=" .. Secret(UnitIsDead("softinteract")))
+end)
+
+function P.loot(arg)
+    lootOn = not lootOn
+    if not lootOn then
+        lootWatch:UnregisterEvent("PLAYER_SOFT_INTERACT_CHANGED")
+        TP.Log("loot: before restore " .. SoftCVars())
+        for name, value in pairs(lootSaved or {}) do SetCVar(name, value) end
+        lootSaved = nil
+        return Done("loot", "off, " .. SoftCVars())
+    end
+    TP.Log("loot: " .. SoftCVars())
+    for i = 1, C_Minimap.GetNumTrackingTypes() do
+        local info = C_Minimap.GetTrackingInfo(i)
+        if info then
+            TP.Log(("loot: tracking %d %s type=%s sub=%s spell=%s active=%s"):format(i, Str(info.name),
+                Str(info.type), Str(info.subType), Str(info.spellID), Str(info.active)))
+        end
+    end
+    if arg == "all" then
+        lootSaved = {}
+        for _, name in ipairs({ "SoftTargetIconInteract", "SoftTargetIconGameObject", "SoftTargetLowPriorityIcons" }) do
+            lootSaved[name] = GetCVar(name)
+            SetCVar(name, "1")
+        end
+    end
+    lootWatch:RegisterEvent("PLAYER_SOFT_INTERACT_CHANGED")
+    Done("loot", "on" .. (lootSaved and ", all icons" or "") .. ": look at corpses, herbs, ore, chests")
+end
+
+-- With the mailbox's send tab open: puts the first item of the backpack that
+-- isn't soulbound into the mail by the API and, with an arg, writes it as
+-- recipient. Logs the player's name forms and which banks the game has.
+function P.mail(arg)
+    TP.Log("mail: name=" .. Str(UnitName("player")) .. " full=" .. Str(GetUnitName("player", false))
+        .. " withRealm=" .. Str(GetUnitName("player", true)))
+    for key, value in pairs(Enum.BankType) do
+        TP.Log("mail: bank " .. key .. "=" .. value .. " canView=" .. Str(C_Bank.CanViewBank(value)))
+    end
+    if not (SendMailFrame and SendMailFrame:IsShown()) then return Done("mail", "open the send tab first") end
+    local free
+    for i = 1, ATTACHMENTS_MAX_SEND do
+        if not GetSendMailItem(i) then free = i break end
+    end
+    if not free then return Done("mail", "no free attachment slot") end
+    for slot = 1, C_Container.GetContainerNumSlots(0) do
+        local info = C_Container.GetContainerItemInfo(0, slot)
+        if info and not info.isBound then
+            ClearCursor()
+            C_Container.PickupContainerItem(0, slot)
+            ClickSendMailItemButton(free)
+            local name = GetSendMailItem(free)
+            if arg then SendMailNameEditBox:SetText(arg) end
+            return Done("mail", "slot " .. slot .. " -> attachment " .. free .. ": " .. Str(name)
+                .. (arg and (", recipient " .. arg) or ""))
+        end
+    end
+    Done("mail", "no unbound item in the backpack")
+end
+
+local XP_ITEMS = { 274709, 274710, 274711, 274712, 289334 }
+
+-- Rest and XP bonuses: rested XP, resting, every aura on the player (with
+-- its tooltip's text), and what the XP items' tooltips say.
+function P.xp()
+    TP.Log(("xp: rested=%s resting=%s level=%s"):format(Secret(GetXPExhaustion()), Secret(IsResting()),
+        Secret(UnitLevel("player"))))
+    for i = 1, 40 do
+        local aura = C_UnitAuras.GetAuraDataByIndex("player", i, "HELPFUL")
+        if not aura then break end
+        local lines = {}
+        local tip = C_TooltipInfo.GetUnitBuffByAuraInstanceID
+            and C_TooltipInfo.GetUnitBuffByAuraInstanceID("player", aura.auraInstanceID)
+        for _, line in ipairs(tip and tip.lines or {}) do lines[#lines + 1] = Secret(line.leftText) end
+        TP.Log("xp: aura " .. Secret(aura.name) .. " spell=" .. Secret(aura.spellId) .. " | " .. table.concat(lines, " / "))
+    end
+    for _, id in ipairs(XP_ITEMS) do
+        local lines = {}
+        local tip = C_TooltipInfo.GetItemByID(id)
+        for _, line in ipairs(tip and tip.lines or {}) do lines[#lines + 1] = Secret(line.leftText) end
+        TP.Log("xp: item " .. id .. " count=" .. Str(C_Item.GetItemCount(id)) .. " | " .. table.concat(lines, " / "))
+    end
+    Done("xp", "logged; run again with a food or XP buff on")
+end
+
+-- Layer clues: the server, instance and zone parts of the target's GUID, on
+-- every target change and party change, with the party's leader.
+local layerWatch = CreateFrame("Frame")
+local LAYER_EVENTS = { "PLAYER_TARGET_CHANGED", "GROUP_ROSTER_UPDATE", "PARTY_LEADER_CHANGED", "ZONE_CHANGED_NEW_AREA" }
+local layerOn = false
+
+layerWatch:SetScript("OnEvent", function(_, event)
+    local guid = UnitGUID("target")
+    local parts = "none"
+    if type(guid) == "string" and Secret(guid) ~= "<hidden>" and guid:find("^Creature") then
+        local _, _, server, instance, zone, npc = strsplit("-", guid)
+        parts = ("server=%s instance=%s zone=%s npc=%s"):format(server, instance, zone, npc)
+    elseif guid then
+        parts = Secret(guid)
+    end
+    TP.Log(("layer: %s %s group=%s leader=%s map=%s"):format(event, parts, Str(IsInGroup()),
+        Str(UnitIsGroupLeader("player")), Str(C_Map.GetBestMapForUnit("player"))))
+end)
+
+function P.layer()
+    layerOn = not layerOn
+    for _, e in ipairs(LAYER_EVENTS) do
+        if layerOn then layerWatch:RegisterEvent(e) else layerWatch:UnregisterEvent(e) end
+    end
+    Done("layer", layerOn and "on: target an NPC before and after each party change" or "off")
+end
+
 local MACRO_LINES = 30
 
 -- A secure macro button whose macrotext is far over 255 characters; each line
