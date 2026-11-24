@@ -91,6 +91,11 @@ Das Taint-Log des Spiels ist nicht nötig; blockierte Aktionen stehen im Forever
 | `/tp probe addons` | – | Zeigt oben den Knopf „TP: Speichern + neu laden“. Addon-Liste öffnen, ein Addon umschalten, Knopf anklicken. Nach dem Neuladen steht im Log, ob sich ein Zustand geändert hat (`changed={}` heißt: alles gespeichert). Die Änderung danach wieder zurückstellen. |
 | `/tp probe macro` | – | Zeigt den Knopf „TP: Makro“ mit 30 `/run`-Zeilen, zusammen über 1700 Zeichen. Anklicken; jede gelaufene Zeile steht im Log. Fragt das Spiel, ob Skripte erlaubt sind, mit Ja bestätigen. |
 | `/tp probe rares` | – | An/aus. Liest Kreaturen nur über die Ereignisse von Namensplaketten, Mouseover und Ziel (`UnitClassification`), nie einen Plaketten-Rahmen: jede Kreatur einmal ins Log, Rares mit `RARE` und einer Chatzeile. In ein Gebiet mit Rares laufen, danach mit A NPCs ansprechen: ein `ADDON_ACTION_*` im Log hieße Taint. |
+| `/tp probe threat` | Ziel ein Gegner, am besten in Gruppe oder mit Begleiter | An/aus. Loggt höchstens einmal je Sekunde jede Bedrohungsabfrage für Spieler, Begleiter und Gruppe gegen das Ziel, ob sie geheim ist, und wie oft jedes Bedrohungsereignis seit der letzten Zeile kam (S-131). |
+| `/tp probe loot [all]` | – | An/aus. Loggt die Soft-Target-CVars, die Ortungsarten der Minikarte und jedes Soft-Interaktionsziel (Art, Name, tot). Mit `all` alle Interaktionssymbole als temporäre Werte an; aus stellt die des Pad-Modus zurück und loggt die CVars erneut (S-132). |
+| `/tp probe mail [Name]` | Briefkasten, Senden-Reiter offen | Hängt das erste ungebundene Item des Rucksacks per API an und trägt mit Name den Empfänger ein (`SendMailNameEditBox:SetText`, Taint-Experiment). Loggt die Namensformen und die Bankarten (S-133). |
+| `/tp probe xp` | einmal ohne, einmal mit Essens- oder XP-Buff | Loggt Erholung, Ausruhen, jede Aura mit Tooltip und die Tooltips der XP-Items (S-135). |
+| `/tp probe layer` | in Gruppe | An/aus. Loggt bei Ziel-, Gruppen- und Gebietswechsel die Server-, Instanz- und Zonen-Teile der GUID des Ziels und ob du die Gruppe leitest (S-134). |
 
 `/tp probe frame <Name>` schreibt einen Rahmen mit Ankern, Kindern und Eltern-Kette ins Log (sichtbar, Alpha, Ebene, Maus). `/tp probe watch <Name>` lässt die laufende Sonde zusätzlich jede Änderung von Sichtbarkeit und Ankern dieses Rahmens loggen.
 

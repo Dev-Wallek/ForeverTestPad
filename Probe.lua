@@ -397,12 +397,19 @@ local function ThreatLine(unit)
         .. " secretValues=" .. Str(C_Secrets.ShouldUnitThreatValuesBeSecret(unit, "target"))
 end
 
-threatWatch:SetScript("OnEvent", function()
+-- (each event's count since the last line: how often they come)
+local threatCounts = {}
+
+threatWatch:SetScript("OnEvent", function(_, event)
+    threatCounts[event] = (threatCounts[event] or 0) + 1
     if not UnitExists("target") or GetTime() - threatLast < 1 then return end
     threatLast = GetTime()
-    TP.Log(("threat: t=%.1f target=%s class=%s boss=%s combat=%s"):format(GetTime() % 1000,
+    local counts = {}
+    for name, n in pairs(threatCounts) do counts[#counts + 1] = name .. "=" .. n end
+    wipe(threatCounts)
+    TP.Log(("threat: t=%.1f target=%s class=%s boss=%s combat=%s events={%s}"):format(GetTime() % 1000,
         Secret(UnitName("target")), Secret(UnitClassification("target")),
-        Secret(UnitIsBossMob("target")), Str(InCombatLockdown())))
+        Secret(UnitIsBossMob("target")), Str(InCombatLockdown()), table.concat(counts, ",")))
     for _, unit in ipairs(THREAT_UNITS) do
         if UnitExists(unit) then TP.Log("threat:   " .. ThreatLine(unit)) end
     end
@@ -421,12 +428,15 @@ end
 
 -- Interact icons and gathering tracking: the soft-target CVars, each soft
 -- interact target (kind, name, dead or not) and the minimap's tracking types.
--- "/tp probe loot all" also turns on every interact icon until "/tp probe loot"
--- turns it off, then logs the CVars again to show whether the game reset them.
+-- "/tp probe loot all" also turns on every interact icon as temporary values,
+-- as ImprovedForever_Minimap/Highlight.lua does, until "/tp probe loot" puts the
+-- Gamepad UI's back (or none without it) and logs the CVars again.
 local lootWatch = CreateFrame("Frame")
-local SOFT_CVARS = { "SoftTargetInteract", "SoftTargetIconInteract", "SoftTargetIconGameObject",
+local SOFT_CVARS = { "SoftTargetInteract", "SoftTargetIconEnemy", "SoftTargetIconInteract", "SoftTargetIconGameObject",
     "SoftTargetLowPriorityIcons", "SoftTargetNameplateInteract", "SoftTargetInteractRange", "SoftTargetInteractArc" }
-local lootOn, lootSaved = false, nil
+local ICONS = { "SoftTargetIconEnemy", "SoftTargetIconInteract", "SoftTargetIconGameObject", "SoftTargetLowPriorityIcons" }
+local PAD_VALUES = { SoftTargetIconEnemy = "0", SoftTargetIconInteract = "1", SoftTargetIconGameObject = "1" }
+local lootOn, lootAll = false, false
 
 local function SoftCVars()
     local parts = {}
@@ -447,8 +457,17 @@ function P.loot(arg)
     if not lootOn then
         lootWatch:UnregisterEvent("PLAYER_SOFT_INTERACT_CHANGED")
         TP.Log("loot: before restore " .. SoftCVars())
-        for name, value in pairs(lootSaved or {}) do SetCVar(name, value) end
-        lootSaved = nil
+        if lootAll then
+            local pad = GetCVarBool("GamePadEnable")
+            for _, name in ipairs(ICONS) do
+                if pad and PAD_VALUES[name] then
+                    C_CVar.SetTempCVar(name, PAD_VALUES[name])
+                else
+                    C_CVar.RemoveTempCVar(name)
+                end
+            end
+            lootAll = false
+        end
         return Done("loot", "off, " .. SoftCVars())
     end
     TP.Log("loot: " .. SoftCVars())
@@ -460,14 +479,11 @@ function P.loot(arg)
         end
     end
     if arg == "all" then
-        lootSaved = {}
-        for _, name in ipairs({ "SoftTargetIconInteract", "SoftTargetIconGameObject", "SoftTargetLowPriorityIcons" }) do
-            lootSaved[name] = GetCVar(name)
-            SetCVar(name, "1")
-        end
+        for _, name in ipairs(ICONS) do C_CVar.SetTempCVar(name, "1") end
+        lootAll = true
     end
     lootWatch:RegisterEvent("PLAYER_SOFT_INTERACT_CHANGED")
-    Done("loot", "on" .. (lootSaved and ", all icons" or "") .. ": look at corpses, herbs, ore, chests")
+    Done("loot", "on" .. (lootAll and ", all icons" or "") .. ": look at corpses, herbs, ore, chests")
 end
 
 -- With the mailbox's send tab open: puts the first item of the backpack that
@@ -525,7 +541,7 @@ function P.xp()
 end
 
 -- Layer clues: the server, instance and zone parts of the target's GUID, on
--- every target, party and zone change, with the party's leader.
+-- every target, party and zone change, with whether you lead the party.
 local layerWatch = CreateFrame("Frame")
 local LAYER_EVENTS = { "PLAYER_TARGET_CHANGED", "GROUP_ROSTER_UPDATE", "PARTY_LEADER_CHANGED", "ZONE_CHANGED_NEW_AREA" }
 local layerOn = false
