@@ -2,9 +2,9 @@
 local _, TP = ...
 TP.TESTS = {
     { id = 136, section = "Rückmeldungen November (S-117 bis S-126)", prep = "",
-      text = "Einstellungsfenster mehrmals mit Menü×2 öffnen, auch mit dem Junk-Tab zuletzt offen: geht es nicht richtig auf, schließt es sich und im Chat steht „the panel failed to open, please report: …“; diese Zeile bitte melden. Offen: Menü×2 schließt es.", combat = {  } },
+      text = "Einstellungsfenster mehrmals mit Menü×2 öffnen, auch mit dem Junk-Tab zuletzt offen: geht es nicht richtig auf, schließt es sich und im Chat steht „the panel failed to open, please report: …“; diese Zeile bitte melden. Offen: Menü×2 schließt es. Nach jedem Menü×2 ist das Menü-Rad des Spiels zu (auch nicht verdeckt hinter dem Fenster: nach dem Schließen ist keins zu sehen); mit /console taintLog 1 kein Eintrag.", combat = {  } },
     { id = 137, section = "Rückmeldungen November (S-117 bis S-126)", prep = "",
-      text = "Ein Rad mit dem Slot „Destroy“: bei geschlossenen Taschen öffnet er das Destroy-Fenster, auch mit „Destroy panel“ im Junk-Tab aus. Junk-Tab „Destroy panel“ an, Taschen zu, R2 + R3: im Chat steht, dass es nur bei offener Tasche geht (öffnet R2 + R3 ein Rad, keine Meldung).", combat = {  } },
+      text = "Ein Rad mit dem Slot „Destroy“: bei geschlossenen Taschen öffnet er das Destroy-Fenster, auch mit „Open from the bags“ im Junk-Tab aus (der Schalter hieß vorher „Destroy panel“). „Open from the bags“ an, Taschen zu, R2 + R3: im Chat steht, dass es nur bei offener Tasche geht (öffnet R2 + R3 ein Rad, keine Meldung).", combat = {  } },
     { id = 138, section = "Rückmeldungen November (S-117 bis S-126)", prep = "",
       text = "Ein NPC als Ziel, außerhalb des Kampfes: Rad-Slot „Wiki: target“ (Liste „Improved Forever“) oder /if wiki target öffnet seine Wiki-Seite mit Fundort und Drops; ohne Ziel oder mit einem Spieler als Ziel eine Meldung im Chat; im Kampf „opens after combat“.", combat = {  } },
     { id = 139, section = "Rückmeldungen November (S-117 bis S-126)", prep = "",
