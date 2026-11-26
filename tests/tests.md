@@ -187,17 +187,36 @@ Der Scan geht höchstens alle 15 Minuten, also zwischen den Punkten warten.
 
 Vorher den Ordner `ImprovedForever_Threat` in den AddOns-Ordner verlinken.
 
-144. Addon-Liste: „Improved Forever: Threat“ mit Schild-Symbol; Einstellungen: Tab „Threat“ mit demselben Symbol und den Schaltern „Threat meter“, „When alone“, „Aggro warnings“. Modul in der Addon-Liste aus, `/reload`: Tab weg, kein Messer im Kampf; wieder an.
-145. In einer Gruppe gegen einen normalen Gegner kämpfen: unter dem Zielfenster der Messer mit dir, Begleiter und Gruppe, der Höchste oben, Prozent rechts, Balken in der Farbe des Stands (grau, gelb, orange, rot). Allein nur mit Begleiter: zwei Zeilen; ganz allein kein Messer, mit „When alone“ an eine Zeile. Ziel weg oder freundlich: Messer weg.
+144. Addon-Liste: „Improved Forever: Threat“ mit Schild-Symbol; Einstellungen: Tab „Threat“ mit demselben Symbol und den Schaltern „Threat meter“, „When alone“, „Only when close“, „Aggro warnings“. Modul in der Addon-Liste aus, `/reload`: Tab weg, kein Messer im Kampf; wieder an.
+145. Threat-Tab, „Threat meter“ an. In einer Gruppe gegen einen normalen Gegner kämpfen: der Messer (Platz siehe 167) mit dir, Begleiter und Gruppe, der Höchste oben, Prozent rechts, Balken in der Farbe des Stands (grau, gelb, orange, rot). Allein nur mit Begleiter: zwei Zeilen; ganz allein kein Messer, mit „When alone“ an eine Zeile. Ziel weg oder freundlich: Messer weg.
 146. Als Tank: kommt ein anderer nah an deine Bedrohung, steht oben rot „Losing aggro!“; als DD nahe an der Bedrohung des Tanks orange „Pulling aggro!“. „Aggro warnings“ aus: nur „Threat“.
 147. Gegen einen Boss: der Messer zeigt nur Farben, keine Prozente, keine Fehlermeldung.
-148. Immersion mit Zielkopf an: der Messer steht unter Immersions Zielkopf, die Überschrift in dessen Schrift. Gruppenkarten im Tank-Modus: der Rand nach Bedrohung wie vorher.
+148. Immersion mit Zielkopf an, Gruppenkarten aus: der Messer steht unter Immersions Zielkopf. Gruppenkarten im Tank-Modus: der Rand nach Bedrohung wie vorher.
 149. Minimap-Tab, „Loot and gathering“: „All interact icons“ an: Symbole über Leichen, Truhen, Kräutern und Erz in Reichweite (Screenshot). Einmal von Pad auf Maus und zurück wechseln: die Symbole bleiben. Aus: die Spieloption „Interaktionssymbole“ steht wie vorher.
 150. „Track your gathering“ an, mit Kräuterkunde oder Bergbau: die Kräuter- bzw. Erzsuche der Minikarte ist an, auch nach einem Neueinloggen; ein Charakter ohne Sammelberuf: keine Ortung neu an, keine Fehlermeldung.
 151. General-Tab, „Mail“: „Bank character“ zeigt nur deine Charaktere auf diesem Realm und dieser Seite; einen wählen. Am Briefkasten, Senden-Reiter: rechts neben dem Empfänger „Bank: <Name>“. Bindings-Tab: „Mail to Bank“ (Liste „Bags“) auf eine Taste legen; sie legt das Taschen-Item unter dem Cursor in den nächsten freien Platz, Strg + Rechtsklick ebenso; mit gehaltener Schulter- oder Triggertaste tut die Taste nichts; nichts wird verschickt. Einen zweiten Charakter auf einem anderen Realm oder der anderen Seite einloggen: dort ist kein Bank-Twink gewählt. Beim 13. Item steht im Chat „The mail is full (12 items).“ „Mail to Bank“ aus: Taste und Klick tun nichts, der Hinweis ist weg.
 152. `/console taintLog 1`. Ein Item mit „Mail to Bank“ anhängen, Namen eintippen, mit dem Knopf des Spiels senden, Postfenster mit dem Pad schließen; dann Kampf (unter „Kampf“).
 153. Panel-Tab, „Rested“: ein Charakter unter der Höchststufe mit voller Erholung einloggen: eine Zeile im Chat („Your rested experience is full …“), der XP-Baustein endet auf „(full)“; mit „Rested tips“ an steht ein Tipp dahinter. Mit einem Charakter ohne volle Erholung `/logout` außerhalb von Gasthaus und Stadt: eine Zeile im Chat (abbrechen); im Gasthaus: keine. „Rested reminders“ aus: keine Zeilen.
 154. Überwachte Tasten, je einmal: Schrott markieren (L2 + L3 auf ein Taschen-Item), Sell All Junk per Taste beim Händler, Minikarten-Namen per Taste, Fischsammlung per Taste, Recent loot per Taste, Chat-Tastatur per Taste, Destroy (R2 + R3 bei offener Tasche): jede tut, was sie soll, genau einmal je Druck; die Taste tut daneben weiter ihr Eigenes. Dabei `/if perf 20`: in der Liste stehen Zeilen „key watch: …“ (Destroy liest seine Taste selbst und hat keine).
+
+## Einstellungsfenster nach dem Kampf (S-149)
+
+155. `/console scriptErrors 1`, das Einstellungsfenster mit Menü×2 öffnen; dann Kampf (unter „Kampf“).
+
+## Rückmeldungen November, Teil 2 (S-151 bis S-162)
+
+156. Sonde Realm-Name: einloggen, Auktionshaus öffnen, Scan abwarten, `/reload`; dann `ImprovedForever.lua` und `ImprovedForever_Auction.lua` aus `WTF/Account/<Konto>/SavedVariables/` bereitstellen (auf dem Deck genauso). Erwartet: unter `realms` kein Eintrag `""` mehr, die Tage vom 22.11. beim echten Realm; steht im Chat „auction: the game gives no realm name …“, das melden.
+157. Eine Ware mit mehreren Angeboten öffnen, das günstigste kaufen: Tooltip („Auction: lowest“) und Detail zeigen sofort den neuen niedrigsten Preis, nicht den alten. Eine Ware ganz aufkaufen (oder eine suchen, die keiner anbietet): Tooltip „Auction: lowest — none listed“.
+158. Eine Ware kaufen: im Chat „bought N × <Name>.“; verlangt der Server weniger als geplant, steht dahinter „for … (planned …, … less)“. Wenn möglich mit einem zweiten Charakter: Detail offen lassen, der zweite kauft das günstigste Angebot, dann halten: kein Kauf, im Chat „not bought: … now cost …, planned …“, die Angebote laden neu, erneutes Halten kauft zum neuen Preis.
+159. Buy, Kategorie „Below vendor price“, eine Ware unter dem Händlerpreis: im Detail steht „Buy“ statt „Hold to Buy“, ein kurzer Druck auf A kauft (ohne Halten), kein Fehlerfenster. Menge so hoch, dass der Preis über dem Händlerpreis liegt: wieder „Hold to Buy“. Eine einzelne Auktion in der Kategorie: ein Tipp kauft. Dieselbe Ware in einer anderen Kategorie: halten wie immer.
+160. Tooltip einer Ware mit vielen Angeboten: „Auction: usually“, „Auction: now“ (Durchschnitt der günstigsten) und „Auction: lowest“; bei wenigen Angeboten nur „Auction: lowest (few listed)“ (und „usually“, wenn es Verlauf gibt). Detail: „Lowest … · now … · usually …“. Auction-Tab: die Tipps zu „Tooltips“ und „Bargains at“ erklären usually, now, lowest, few/none listed und die Abzeichen. Diagramm: Legende „Now“, „Usual“, „Lowest“, eine dünne waagerechte Linie für „Usual“. Sell-Tab für ein Item mit einem Angebot weit unter allen anderen: der Vorschlag unterbietet das nächste, darunter „Left out 1 listed far under the rest (from …)“.
+161. Nach einem Scan: Kategorie „Bargains“ zeigt auch Items ohne drei Tage Verlauf, wenn ein paar Angebote weit unter den übrigen liegen, mit Abzeichen „-NN% now“; Items mit Verlauf „-NN% usual“. Dieselben Abzeichen in den anderen Kategorien.
+162. Detail einer Ware mit mehreren Preisstufen: unter der Menge bis zu sechs Stufen „12 × …“; die, die die Menge kauft, hell, der Rest grau; die Menge ändern: die Hervorhebung folgt.
+163. Fern vom Auktionshaus: Berufsfenster, „Add Task“ für ein Rezept mit Auktions-Reagenzien: „Estimate cost“ zeigt „usually … · now …“ (oder nur einen Preis, wenn beide gleich sind).
+164. Sonde Texteingabe: Einstellungen, Wheel-Tab, ein eigenes Rad umbenennen (und „+ Add a phrase“) nur mit dem Pad: tippt die Tastatur? Nach gut einer Sekunde steht „wheel focus probe: N lines“ im Chat; `/reload`, `ImprovedForever.lua` bereitstellen.
+165. Immersion-Tab, Nameplates: „Nameplate threat“ an. Im Kampf gegen mehrere Gegner: unter der Lebenslinie jedes Gegners eine dünne Linie, gelb kurz vorm Ziehen, orange und rot, wenn er auf dir ist, keine, solange du weit unten auf seiner Liste stehst. „Nameplate threat: who has it“ an: links daneben ein Punkt in der Klassenfarbe dessen, auf dem der Gegner ist. Taint-Log im Kampf (unter „Kampf“).
+166. Immersion-Tab, Party: „Party cards threat“ an, in einer Gruppe als Heiler oder DD: eine Karte mit hoher Bedrohung bekommt außen einen dünnen gelben, orangen oder roten Rand, neben den Heiler-Rändern lesbar; als Tank die Ränder wie bisher, kein zusätzlicher.
+167. Threat-Tab: dein gespeichertes „Threat meter“ bleibt an. Mit Immersions Gruppenkarten: der Messer steht unten rechts neben den Karten (und der Raute fürs Gruppen-Zaubern), bündig mit ihrer Unterkante, vor den Zauber-Rauten; laufende Cooldowns (rechts der Gruppe) beginnen erst rechts vom Messer; bleibt dort Platz für weniger als vier, steht der Messer über ihrer Reihe; keiner verdeckt den anderen; ohne Gruppe unten in der Mitte; reicht der Platz nicht, keiner. Ohne Hintergrund, dünne Balken, halb durchsichtig, bei „Losing/Pulling aggro!“ voll. „Only when close“ an: nur bei einer Warnung. Immersion aus: unter dem Zielfenster.
 
 ## Kampf
 
@@ -207,6 +226,7 @@ Vor dem Kampf (A), dann ein Kampf ohne Blockade:
 
 - 69: nach den Fällen a–d des Taint-Logs (der Kampf gehört noch in dasselbe Log).
 - 152: Mail to Bank benutzt und das Postfenster mit dem Pad geschlossen (im selben Taint-Log).
+- 165: `/console taintLog 1`, „Nameplate threat“ und „who has it“ an; nach dem Kampf arbeitet die Interaktionstaste des Pads wie immer.
 
 Im Kampf:
 
@@ -219,3 +239,4 @@ Im Kampf:
 Kampfbeginn:
 
 - 32: bei offenem ImprovedForever-Fenster, vorn und im Hintergrund: es schließt ohne Blockade; im Kampf öffnet `/if addons` nicht, Hinweis im Chat.
+- 155: Einstellungsfenster offen: es schließt; nach dem Kampf der Reihe nach Menü×2, `/if` und die Taste „Toggle Improved Forever panel“. Erwartet: jeder Weg öffnet es, kein Fehlerfenster; sonst melden, welcher Weg nicht öffnet, und den Fehlertext (Foto genügt).
